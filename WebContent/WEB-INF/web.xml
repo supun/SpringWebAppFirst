@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" 
+	xmlns="http://java.sun.com/xml/ns/j2ee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	
+  <!-- Start the Spring listener that loads the application context
+       when the Web app starts up. It assumes the context is named
+       /WEB-INF/applicationContext.xml unless you set a context param
+       called contextConfigLocation to override it. -->
+  <listener>
+    <listener-class>
+      org.springframework.web.context.ContextLoaderListener
+    </listener-class>
+  </listener>
+  <!-- Lets the bean definition file specify scopes of request 
+       and session. -->
+  <listener>
+    <listener-class>
+      org.springframework.web.context.request.RequestContextListener
+    </listener-class>
+  </listener>
+ 
+   <!-- Use the URL http://hostname/app-name/input-form
+       for the InputServlet -->
+  <servlet>
+    <servlet-name>Input Form Servlet</servlet-name>
+    <servlet-class>coreservlets.InputFormServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Input Form Servlet</servlet-name>
+    <url-pattern>/input-form</url-pattern>
+  </servlet-mapping>
+   
+  <!-- Use the URL http://hostname/app-name/get-customer
+       for the CustomerServlet -->
+  <servlet>
+    <servlet-name>Customer Lookup Servlet</servlet-name>
+    <servlet-class>coreservlets.CustomerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Customer Lookup Servlet</servlet-name>
+    <url-pattern>/get-customer</url-pattern>
+  </servlet-mapping>
+  
+  <!-- If the URL gives a directory but not a filename, try
+       index.jsp first and index.html second. If neither is
+       found, the result is server-specific (e.g., a  
+       directory listing or a 404 error).  
+  -->
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+</web-app>
